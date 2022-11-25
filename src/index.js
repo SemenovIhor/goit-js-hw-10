@@ -18,12 +18,6 @@ const onInputFormType = event => {
   }
   fetchCountries(dataInput)
     .then(data => {
-      if (data.length > 10) {
-        Notify.info(
-          'Too many matches found. Please enter a more specific name.'
-        );
-        return;
-      }
       createResult(data);
     })
     .catch(error => {
@@ -56,7 +50,13 @@ const createInfoCountries = country => {
   });
 };
 const createResult = country => {
-  if (country.length === 1) {
+  if (country.length > 10) {
+    Notify.info(
+      'Too many matches found. Please enter a more specific name.'
+    );
+    return;
+  }
+  else  if (country.length === 1) {
     cleanField(countryList);
     countryInfo.innerHTML = createInfoCountries(country);
   } else {

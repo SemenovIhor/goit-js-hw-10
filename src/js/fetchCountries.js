@@ -3,11 +3,10 @@ const fetchCountries = name => {
   return fetch(`
     ${Url_Countries}${name}?fields=name,capital,population,flags,languages`)
     .then(response => {
-      console.log(response.ok);
+      if (!response.ok) {
+        // alert('Я не знаю такої країни');
+      }
       return response.json();
-    })
-    .catch(error => {
-      // alert('Я не знаю такої країни');
     });
 };
 export { fetchCountries };
